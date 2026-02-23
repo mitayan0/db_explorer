@@ -162,6 +162,17 @@ class WorksheetManager(QWidget):
         if editor:
             editor.textCursor().removeSelectedText()
 
+    def go_to_line(self):
+        editor = self._get_current_editor()
+        if editor:
+            line, ok = QInputDialog.getInt(self, "Go to Line", "Line Number:", 1, 1, editor.blockCount())
+            if ok:
+                cursor = editor.textCursor()
+                cursor.movePosition(QTextCursor.MoveOperation.Start)
+                cursor.movePosition(QTextCursor.MoveOperation.Down, QTextCursor.MoveMode.MoveAnchor, line - 1)
+                editor.setTextCursor(cursor)
+                editor.centerCursor()
+
 
 
     def close_tab(self, index):
@@ -328,21 +339,9 @@ class WorksheetManager(QWidget):
             edit_menu.addAction(action)
             return action
 
-        def go_to_line():
-            editor = self._get_current_editor()
-            if editor:
-                line, ok = QInputDialog.getInt(self, "Go to Line", "Line Number:", 1, 1, editor.blockCount())
-                if ok:
-                    cursor = editor.textCursor()
-                    cursor.movePosition(QTextCursor.MoveOperation.Start)
-                    cursor.movePosition(QTextCursor.MoveOperation.Down, QTextCursor.MoveMode.MoveAnchor, line - 1)
-                    editor.setTextCursor(cursor)
-                    editor.centerCursor()
-
-        # Actions matching original functionality
         add_menu_action("Find", "Ctrl+F", "assets/search.svg", lambda: self.open_find_dialog(False))
         add_menu_action("Replace", "Ctrl+Alt+F", "assets/refresh.svg", lambda: self.open_find_dialog(True))
-        add_menu_action("Go to Line/Column", "Ctrl+L", None, go_to_line)
+        add_menu_action("Go to Line/Column", "Ctrl+L", None, self.go_to_line)
         edit_menu.addSeparator() 
         add_menu_action("Indent Selection", "Tab", None, lambda: self._get_current_editor() and self._get_current_editor().indent_selection())
         add_menu_action("Unindent Selection", "Shift+Tab", None, lambda: self._get_current_editor() and self._get_current_editor().unindent_selection())
@@ -362,7 +361,7 @@ class WorksheetManager(QWidget):
         # Ensure shortcuts work globally for this tab/window
         QShortcut(QKeySequence("Ctrl+F"), tab_content, lambda: self.open_find_dialog(False))
         QShortcut(QKeySequence("Ctrl+Alt+F"), tab_content, lambda: self.open_find_dialog(True))
-        QShortcut(QKeySequence("Ctrl+L"), tab_content, go_to_line)
+        QShortcut(QKeySequence("Ctrl+L"), tab_content, self.go_to_line)
         QShortcut(QKeySequence("Ctrl+/"), tab_content, lambda: self._get_current_editor() and self._get_current_editor().toggle_comment())
         QShortcut(QKeySequence("Ctrl+Shift+U"), tab_content, lambda: self._get_current_editor() and self._get_current_editor().toggle_case())
         QShortcut(QKeySequence("Ctrl+Alt+L"), tab_content, self.clear_query_text)

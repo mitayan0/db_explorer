@@ -410,6 +410,31 @@ class CodeEditor(QPlainTextEdit):
                 file_cursor.insertText("-- ")
         cursor.endEditBlock()
 
+    def initial_caps(self):
+        cursor = self.textCursor()
+        if not cursor.hasSelection():
+            return
+        text = cursor.selectedText()
+        cursor.insertText(text.title())
+
+    def swap_lines(self):
+        cursor = self.textCursor()
+        cursor.beginEditBlock()
+        cursor.movePosition(QTextCursor.MoveOperation.StartOfBlock)
+        line1 = cursor.block().text()
+        if cursor.movePosition(QTextCursor.MoveOperation.Up):
+            line2 = cursor.block().text()
+            # Select the current line (line2)
+            cursor.select(QTextCursor.SelectionType.LineUnderCursor)
+            cursor.removeSelectedText()
+            cursor.insertText(line1)
+            # Move to the line below (where line1 was)
+            cursor.movePosition(QTextCursor.MoveOperation.Down)
+            cursor.select(QTextCursor.SelectionType.LineUnderCursor)
+            cursor.removeSelectedText()
+            cursor.insertText(line2)
+        cursor.endEditBlock()
+
     def toggle_case(self):
         cursor = self.textCursor()
         if not cursor.hasSelection():

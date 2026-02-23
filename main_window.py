@@ -167,8 +167,6 @@ class MainWindow(QMainWindow):
     def _delete_object_from_menu(self):
         self.connection_manager._delete_object_from_menu()
 
-    def _properties_object_from_menu(self):
-        self.connection_manager._properties_object_from_menu()
 
     def refresh_object_explorer(self):
         self.connection_manager.refresh_object_explorer()
@@ -186,7 +184,6 @@ class MainWindow(QMainWindow):
 #{moitre}
     def _create_actions(self):
         self.open_file_action = QAction(QIcon("assets/bright_folder_icon.svg"), "Open File", self)
-        self.open_file_action.setIconVisibleInMenu(False)
         self.open_file_action.setShortcut("Ctrl+O")
         self.open_file_action.triggered.connect(self.open_sql_file)
 
@@ -195,12 +192,10 @@ class MainWindow(QMainWindow):
         self.save_action.triggered.connect(self.save_sql_file)
         
         self.save_as_action = QAction(QIcon("assets/bright_save_icon.svg"), "Save As...", self)
-        self.save_as_action.setIconVisibleInMenu(False)
         self.save_as_action.setShortcut("Ctrl+Shift+S")
         self.save_as_action.triggered.connect(self.save_sql_file_as)
         
         self.exit_action = QAction(QIcon("assets/exit.svg"), "Exit", self)
-        self.exit_action.setIconVisibleInMenu(False)
         self.exit_action.setShortcut("Ctrl+Q")
         self.exit_action.triggered.connect(self.close)
 
@@ -213,12 +208,10 @@ class MainWindow(QMainWindow):
         self.close_all_tabs_action.triggered.connect(self.close_all_tabs)
         
         self.execute_action = QAction(QIcon("assets/execute_icon.png"), "Execute", self)
-        self.execute_action.setIconVisibleInMenu(False)
         self.execute_action.setShortcuts(["Ctrl+Enter","Ctrl+RETURN"])
         self.execute_action.triggered.connect(self.execute_query)
         
         self.explain_action = QAction(QIcon("assets/explain_icon.png"), "Explain", self)
-        self.explain_action.setIconVisibleInMenu(False)
         self.explain_action.setShortcut("Ctrl+E")
         self.explain_action.triggered.connect(self.explain_query)
         
@@ -229,35 +222,62 @@ class MainWindow(QMainWindow):
         self.explain_plan_action.triggered.connect(self.explain_plan_query)
 
         self.cancel_action = QAction(QIcon("assets/cancel_icon.png"), "Cancel", self)
-        self.cancel_action.setIconVisibleInMenu(False)
         self.cancel_action.triggered.connect(self.cancel_current_query)
         self.cancel_action.setEnabled(False)
         
-        self.undo_action = QAction("Undo", self)
+        self.undo_action = QAction(QIcon("assets/undo.svg"), "Undo", self)
         self.undo_action.setShortcut("Ctrl+Z")
         self.undo_action.triggered.connect(self.undo_text)
         
-        self.redo_action = QAction("Redo", self)
+        self.redo_action = QAction(QIcon("assets/redo.svg"), "Redo", self)
         self.redo_action.setShortcuts(["Ctrl+Y", "Ctrl+Shift+Z"])
         self.redo_action.triggered.connect(self.redo_text)
         
-        self.cut_action = QAction("Cut", self)
+        self.cut_action = QAction(QIcon("assets/cut.svg"), "Cut", self)
         self.cut_action.setShortcut("Ctrl+X")
         self.cut_action.triggered.connect(self.cut_text)
         
-        self.copy_action = QAction("Copy", self)
+        self.copy_action = QAction(QIcon("assets/copy.svg"), "Copy", self)
         self.copy_action.setShortcut("Ctrl+C")
         self.copy_action.triggered.connect(self.copy_text)
         
-        self.paste_action = QAction("Paste", self)
+        self.paste_action = QAction(QIcon("assets/paste.svg"), "Paste", self)
         self.paste_action.setShortcut("Ctrl+V")
         self.paste_action.triggered.connect(self.paste_text)
         
-        self.delete_action = QAction("Delete", self)
-        self.delete_action.triggered.connect(self.delete_text)
+        self.select_all_action = QAction(QIcon("assets/select_all.svg"), "Select ALL", self)
+        self.select_all_action.setShortcut("Ctrl+A")
+        self.select_all_action.triggered.connect(self.select_all_text)
+
+        self.clear_all_action = QAction(QIcon("assets/trash.svg"), "Clear All", self)
+        self.clear_all_action.setShortcut("F7")
+        self.clear_all_action.triggered.connect(self.clear_query_text)
+
+        self.goto_line_action = QAction(QIcon("assets/goto_line.svg"), "Goto Line", self)
+        self.goto_line_action.setShortcut("Ctrl+G")
+        self.goto_line_action.triggered.connect(self.goto_line)
+
+        self.comment_block_action = QAction(QIcon("assets/comment.svg"), "Comment Block", self)
+        self.comment_block_action.setShortcut("Ctrl+B")
+        self.comment_block_action.triggered.connect(self.comment_block)
+
+        self.uncomment_block_action = QAction(QIcon("assets/uncomment.svg"), "Uncomment Block", self)
+        self.uncomment_block_action.setShortcut("Ctrl+Shift+B")
+        self.uncomment_block_action.triggered.connect(self.uncomment_block)
+
+        self.upper_case_action = QAction(QIcon("assets/uppercase.svg"), "Upper Case", self)
+        self.upper_case_action.setShortcut("Ctrl+U")
+        self.upper_case_action.triggered.connect(self.upper_case_text)
+
+        self.lower_case_action = QAction(QIcon("assets/lowercase.svg"), "Lower Case", self)
+        self.lower_case_action.setShortcut("Ctrl+L")
+        self.lower_case_action.triggered.connect(self.lower_case_text)
+
+        self.initial_caps_action = QAction("Initial Caps", self)
+        self.initial_caps_action.setShortcut("Ctrl+I")
+        self.initial_caps_action.triggered.connect(self.initial_caps_text)
         
         self.query_tool_action = QAction(QIcon("assets/sql_sheet_plus.svg"), "Query Tool", self)
-        self.query_tool_action.setIconVisibleInMenu(False)
         self.query_tool_action.setShortcut("Ctrl+T")
         self.query_tool_action.triggered.connect(self.add_tab)
         
@@ -283,33 +303,23 @@ class MainWindow(QMainWindow):
         self.about_action.triggered.connect(self.show_about_dialog)
         
         self.format_sql_action = QAction(QIcon("assets/format_icon.png"), "Format SQL", self)
-        self.format_sql_action.setIconVisibleInMenu(False)
         self.format_sql_action.setShortcut("Ctrl+Shift+F")
         self.format_sql_action.triggered.connect(self.format_sql_text)
 
         self.clear_query_action = QAction(QIcon("assets/delete_icon.png"), "Clear Query", self)
-        self.clear_query_action.setIconVisibleInMenu(False)
         self.clear_query_action.setShortcut("Ctrl+Shift+c")
         self.clear_query_action.triggered.connect(self.clear_query_text)
 
         # Object Menu Actions
         self.create_table_action = QAction(QIcon("assets/table.svg"), "Table...", self)
-        self.create_table_action.setIconVisibleInMenu(False)
         self.create_table_action.triggered.connect(self._create_table_from_menu)
         
         self.create_view_action = QAction(QIcon("assets/eye.svg"), "View...", self)
-        self.create_view_action.setIconVisibleInMenu(False)
         self.create_view_action.triggered.connect(self._create_view_from_menu)
 
         self.delete_object_action = QAction(QIcon("assets/trash.svg"), "Delete/Drop...", self)
-        self.delete_object_action.setIconVisibleInMenu(False)
         
-        self.properties_object_action = QAction(QIcon("assets/settings.svg"), "Properties...", self)
-        self.properties_object_action.setIconVisibleInMenu(False)
-        self.properties_object_action.triggered.connect(self._properties_object_from_menu)
-
         self.query_tool_obj_action = QAction(QIcon("assets/sql_sheet_plus.svg"), "Query Tool", self)
-        self.query_tool_obj_action.setIconVisibleInMenu(False)
         self.query_tool_obj_action.triggered.connect(self._query_tool_from_menu)
 
 
@@ -339,10 +349,27 @@ class MainWindow(QMainWindow):
         edit_menu = menubar.addMenu("&Edit")
         edit_menu.addAction(self.undo_action)
         edit_menu.addAction(self.redo_action)
+        edit_menu.addSeparator()
         edit_menu.addAction(self.cut_action)
         edit_menu.addAction(self.copy_action)
         edit_menu.addAction(self.paste_action)
-        edit_menu.addAction(self.delete_action)
+        edit_menu.addAction(self.select_all_action)
+        edit_menu.addAction(self.clear_all_action)
+        edit_menu.addSeparator()
+        
+        # Additional features from image
+        edit_menu.addAction(self.format_sql_action)
+        edit_menu.addAction(self.goto_line_action)
+        edit_menu.addAction(self.comment_block_action)
+        edit_menu.addAction(self.uncomment_block_action)
+        edit_menu.addSeparator()
+        
+        edit_menu.addAction(self.upper_case_action)
+        edit_menu.addAction(self.lower_case_action)
+        edit_menu.addAction(self.initial_caps_action)
+        edit_menu.addSeparator()
+        
+        # edit_menu.addAction(self.describe_action)
         actions_menu = menubar.addMenu("&Actions")
         actions_menu.addAction(self.execute_action)
         actions_menu.addAction(self.explain_action)
@@ -512,6 +539,48 @@ class MainWindow(QMainWindow):
 
     def delete_text(self):
         self.worksheet_manager.delete_text()
+
+    def select_all_text(self):
+        editor = self._get_current_editor()
+        if editor:
+            editor.selectAll()
+
+    def goto_line(self):
+        self.worksheet_manager.go_to_line()
+
+    def comment_block(self):
+        editor = self._get_current_editor()
+        if editor:
+            editor.toggle_comment()
+
+    def uncomment_block(self):
+        editor = self._get_current_editor()
+        if editor:
+            editor.toggle_comment()
+
+    def upper_case_text(self):
+        editor = self._get_current_editor()
+        if editor:
+            cursor = editor.textCursor()
+            if cursor.hasSelection():
+                text = cursor.selectedText()
+                cursor.insertText(text.upper())
+
+    def lower_case_text(self):
+        editor = self._get_current_editor()
+        if editor:
+            cursor = editor.textCursor()
+            if cursor.hasSelection():
+                text = cursor.selectedText()
+                cursor.insertText(text.lower())
+
+    def initial_caps_text(self):
+        editor = self._get_current_editor()
+        if editor:
+            cursor = editor.textCursor()
+            if cursor.hasSelection():
+                text = cursor.selectedText()
+                cursor.insertText(text.title())
 
     def explain_query(self):
         self.worksheet_manager.explain_query()
