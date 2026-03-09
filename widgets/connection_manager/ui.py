@@ -91,9 +91,9 @@ class ConnectionUI:
         self.manager.explorer_search_btn.clicked.connect(self.manager.toggle_explorer_search)
 
         self.manager.explorer_search_layout.addWidget(self.manager.explorer_search_box)
+        self.manager.explorer_search_layout.addWidget(self.manager.explorer_search_btn)
 
-
-                        # New Connection Type
+                         # New Connection Type
         self.add_new_type_btn = QToolButton()
         self.add_new_type_btn.setFixedSize(24, 24)
         self.add_new_type_btn.setIconSize(QSize(16, 16))
@@ -113,11 +113,10 @@ class ConnectionUI:
             }
         """)
         self.add_new_type_btn.clicked.connect(self.manager.add_connection_type_dialog)
-        self.manager.explorer_search_layout.addWidget(self.add_new_type_btn)
-        self.manager.explorer_search_layout.addWidget(self.manager.explorer_search_btn)
 
         object_explorer_header_layout.addStretch()
         object_explorer_header_layout.addWidget(self.manager.explorer_search_container)
+        object_explorer_header_layout.addWidget(self.add_new_type_btn)
 
         self.manager.vertical_splitter = QSplitter(Qt.Orientation.Vertical)
         self.manager.vertical_splitter.setHandleWidth(0)

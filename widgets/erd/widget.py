@@ -22,6 +22,14 @@ class SQLPreviewDialog(QDialog):
     def __init__(self, sql_text, parent=None):
         super().__init__(parent)
         self.setWindowTitle("SQL Script")
+        self.setWindowFlags(
+            Qt.WindowType.Dialog | 
+            Qt.WindowType.WindowTitleHint | 
+            Qt.WindowType.WindowCloseButtonHint |
+            Qt.WindowType.CustomizeWindowHint
+        )
+        self.setWindowFlags(self.windowFlags() & ~Qt.WindowType.WindowSystemMenuHint)
+        self.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
         self.resize(800, 600)
         
         layout = QVBoxLayout(self)

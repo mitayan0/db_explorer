@@ -13,6 +13,16 @@ class CreateTableDialog(QDialog):
         self.resize(600, 450)
         self.db_type = db_type
         
+        self.setFixedSize(600, 450)
+        self.setWindowFlags(
+            Qt.WindowType.Dialog | 
+            Qt.WindowType.WindowTitleHint | 
+            Qt.WindowType.WindowCloseButtonHint |
+            Qt.WindowType.CustomizeWindowHint
+        )
+        self.setWindowFlags(self.windowFlags() & ~Qt.WindowType.WindowSystemMenuHint)
+        self.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
+        
         # Layouts
         layout = QVBoxLayout(self)
         self.tabs = QTabWidget()

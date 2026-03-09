@@ -12,6 +12,16 @@ class CreateViewDialog(QDialog):
         self.resize(600, 500)
         self.db_type = db_type
         
+        from PyQt6.QtCore import Qt
+        self.setWindowFlags(
+            Qt.WindowType.Dialog | 
+            Qt.WindowType.WindowTitleHint | 
+            Qt.WindowType.WindowCloseButtonHint |
+            Qt.WindowType.CustomizeWindowHint
+        )
+        self.setWindowFlags(self.windowFlags() & ~Qt.WindowType.WindowSystemMenuHint)
+        self.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
+        
         layout = QVBoxLayout(self)
         self.tabs = QTabWidget()
         layout.addWidget(self.tabs)

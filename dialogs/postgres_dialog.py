@@ -12,12 +12,17 @@ class PostgresConnectionDialog(QDialog):
     def __init__(self, parent=None, is_editing=False):
         super().__init__(parent)
         self.setWindowTitle("Edit PostgreSQL Connection" if is_editing else "New PostgreSQL Connection")
-        self.resize(560, 360)
-        
-        self.setSizeGripEnabled(True)
-        self.setWindowFlags(self.windowFlags() | Qt.WindowType.Window)
+        self.setFixedSize(560, 420)
+        self.setWindowFlags(
+            Qt.WindowType.Dialog | 
+            Qt.WindowType.WindowTitleHint | 
+            Qt.WindowType.WindowCloseButtonHint |
+            Qt.WindowType.CustomizeWindowHint
+        )
+        self.setWindowFlags(self.windowFlags() & ~Qt.WindowType.WindowSystemMenuHint)
+        self.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
         self._apply_styles()
-
+    
         header_title = QLabel("PostgreSQL Connection")
         header_title.setObjectName("dialogTitle")
         header_subtitle = QLabel("Configure connection details and test before saving.")

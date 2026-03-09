@@ -15,7 +15,15 @@ class OracleConnectionDialog(QDialog):
         self.resize(560, 340)
         
         self.setSizeGripEnabled(True)
-        self.setWindowFlags(self.windowFlags() | Qt.WindowType.Window)
+        self.setFixedSize(560, 420)
+        self.setWindowFlags(
+            Qt.WindowType.Dialog | 
+            Qt.WindowType.WindowTitleHint | 
+            Qt.WindowType.WindowCloseButtonHint |
+            Qt.WindowType.CustomizeWindowHint
+        )
+        self.setWindowFlags(self.windowFlags() & ~Qt.WindowType.WindowSystemMenuHint)
+        self.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
         self._apply_styles()
 
         header_title = QLabel("Oracle Connection")

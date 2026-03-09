@@ -75,6 +75,9 @@ class ConnectionDialogs:
         msg.setWindowTitle(details_title)
         msg.setIcon(QMessageBox.Icon.Information)
         msg.setStandardButtons(QMessageBox.StandardButton.Ok)
+        msg.setWindowFlags(Qt.WindowType.Tool | Qt.WindowType.WindowTitleHint | Qt.WindowType.WindowCloseButtonHint | Qt.WindowType.CustomizeWindowHint)
+        msg.setWindowFlags(msg.windowFlags() & ~Qt.WindowType.WindowSystemMenuHint)
+        msg.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
 
         label = QLabel(details_text)
         label.setTextFormat(Qt.TextFormat.RichText)
@@ -87,9 +90,15 @@ class ConnectionDialogs:
     def add_connection_group(self, parent_item):
         dialog = QDialog(self.manager)
         dialog.setWindowTitle("New Connection Group")
-        dialog.resize(460, 220)
-        dialog.setSizeGripEnabled(True)
-        dialog.setWindowFlags(dialog.windowFlags() | Qt.WindowType.Dialog)
+        dialog.setFixedSize(460, 220)
+        dialog.setWindowFlags(
+            Qt.WindowType.Dialog | 
+            Qt.WindowType.WindowTitleHint | 
+            Qt.WindowType.WindowCloseButtonHint |
+            Qt.WindowType.CustomizeWindowHint
+        )
+        dialog.setWindowFlags(dialog.windowFlags() & ~Qt.WindowType.WindowSystemMenuHint)
+        dialog.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
         dialog.setStyleSheet(self.manager._get_dialog_style())
 
         title_label = QLabel("New Connection Group")
@@ -142,7 +151,15 @@ class ConnectionDialogs:
 
         dialog = QDialog(self.manager)
         dialog.setWindowTitle("Edit Connection Group")
-        dialog.resize(460, 220)
+        dialog.setWindowFlags(
+            Qt.WindowType.Dialog | 
+            Qt.WindowType.WindowTitleHint | 
+            Qt.WindowType.WindowCloseButtonHint |
+            Qt.WindowType.CustomizeWindowHint
+        )
+        dialog.setWindowFlags(dialog.windowFlags() & ~Qt.WindowType.WindowSystemMenuHint)
+        dialog.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
+        dialog.setFixedSize(460, 220)
         dialog.setStyleSheet(self.manager._get_dialog_style())
 
         title_label = QLabel("Edit Connection Group")
@@ -193,12 +210,15 @@ class ConnectionDialogs:
         group_id = item.data(Qt.ItemDataRole.UserRole + 1)
         group_name = item.text()
         
-        reply = QMessageBox.question(
-            self.manager,
-            "Delete Connection Group",
-            f"Are you sure you want to delete the group '{group_name}'?\nThis will also delete ALL connections within this group.",
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-        )
+        msg = QMessageBox(self.manager)
+        msg.setWindowTitle("Delete Connection Group")
+        msg.setText(f"Are you sure you want to delete the group '{group_name}'?\nThis will also delete ALL connections within this group.")
+        msg.setIcon(QMessageBox.Icon.Question)
+        msg.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        msg.setWindowFlags(Qt.WindowType.Tool | Qt.WindowType.WindowTitleHint | Qt.WindowType.WindowCloseButtonHint | Qt.WindowType.CustomizeWindowHint)
+        msg.setWindowFlags(msg.windowFlags() & ~Qt.WindowType.WindowSystemMenuHint)
+        msg.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
+        reply = msg.exec()
         if reply == QMessageBox.StandardButton.Yes:
             try:
                 db.delete_connection_group(group_id)
@@ -213,7 +233,15 @@ class ConnectionDialogs:
 
         dialog = QDialog(self.manager)
         dialog.setWindowTitle("Edit Connection Type")
-        dialog.resize(460, 260)
+        dialog.setWindowFlags(
+            Qt.WindowType.Dialog | 
+            Qt.WindowType.WindowTitleHint | 
+            Qt.WindowType.WindowCloseButtonHint |
+            Qt.WindowType.CustomizeWindowHint
+        )
+        dialog.setWindowFlags(dialog.windowFlags() & ~Qt.WindowType.WindowSystemMenuHint)
+        dialog.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
+        dialog.setFixedSize(460, 260)
         dialog.setStyleSheet(self.manager._get_dialog_style())
 
         title_label = QLabel("Edit Connection Type")
@@ -273,12 +301,15 @@ class ConnectionDialogs:
         type_id = item.data(Qt.ItemDataRole.UserRole + 1)
         type_name = item.text()
         
-        reply = QMessageBox.question(
-            self.manager,
-            "Delete Connection Type",
-            f"Are you sure you want to delete the type '{type_name}'?\nThis will also delete ALL groups and connections within this type.",
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-        )
+        msg = QMessageBox(self.manager)
+        msg.setWindowTitle("Delete Connection Type")
+        msg.setText(f"Are you sure you want to delete the type '{type_name}'?\nThis will also delete ALL groups and connections within this type.")
+        msg.setIcon(QMessageBox.Icon.Question)
+        msg.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        msg.setWindowFlags(Qt.WindowType.Tool | Qt.WindowType.WindowTitleHint | Qt.WindowType.WindowCloseButtonHint | Qt.WindowType.CustomizeWindowHint)
+        msg.setWindowFlags(msg.windowFlags() & ~Qt.WindowType.WindowSystemMenuHint)
+        msg.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
+        reply = msg.exec()
         if reply == QMessageBox.StandardButton.Yes:
             try:
                 db.delete_connection_type(type_id)

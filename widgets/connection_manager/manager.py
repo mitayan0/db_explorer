@@ -249,12 +249,15 @@ class ConnectionManager(QWidget):
     def delete_connection(self, item):
         conn_data = item.data(Qt.ItemDataRole.UserRole)
         connection_id = conn_data.get("id")
-        reply = QMessageBox.question(
-            self,
-            "Delete Connection",
-            "Are you sure you want to delete this connection?",
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-        )
+        msg = QMessageBox(self)
+        msg.setWindowTitle("Delete Connection")
+        msg.setText("Are you sure you want to delete this connection?")
+        msg.setIcon(QMessageBox.Icon.Question)
+        msg.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+        msg.setWindowFlags(Qt.WindowType.Tool | Qt.WindowType.WindowTitleHint | Qt.WindowType.WindowCloseButtonHint | Qt.WindowType.CustomizeWindowHint)
+        msg.setWindowFlags(msg.windowFlags() & ~Qt.WindowType.WindowSystemMenuHint)
+        msg.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
+        reply = msg.exec()
         if reply == QMessageBox.StandardButton.Yes:
             try:
                 db.delete_connection(connection_id)
@@ -425,7 +428,14 @@ class ConnectionManager(QWidget):
         dialog = QDialog(self)
         dialog.setWindowTitle("New Connection Type")
         dialog.resize(460, 260)
-        dialog.setWindowFlags(dialog.windowFlags() | Qt.WindowType.WindowMinimizeButtonHint | Qt.WindowType.WindowCloseButtonHint | Qt.WindowType.Window)
+        dialog.setWindowFlags(
+            Qt.WindowType.Dialog | 
+            Qt.WindowType.WindowTitleHint | 
+            Qt.WindowType.WindowCloseButtonHint |
+            Qt.WindowType.CustomizeWindowHint
+        )
+        dialog.setFixedSize(460, 300)
+        dialog.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
         dialog.setStyleSheet(self._get_dialog_style())
 
         dialog_layout = QVBoxLayout(dialog)

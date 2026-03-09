@@ -11,7 +11,15 @@ class CSVConnectionDialog(QDialog):
         self.setWindowTitle("Edit CSV Connection" if conn_data else "New CSV Connection")
         self.resize(560, 340)
         self.setSizeGripEnabled(True)
-        self.setWindowFlags(self.windowFlags() | Qt.WindowType.Window)
+        self.setFixedSize(560, 340)
+        self.setWindowFlags(
+            Qt.WindowType.Dialog | 
+            Qt.WindowType.WindowTitleHint | 
+            Qt.WindowType.WindowCloseButtonHint |
+            Qt.WindowType.CustomizeWindowHint
+        )
+        self.setWindowFlags(self.windowFlags() & ~Qt.WindowType.WindowSystemMenuHint)
+        self.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
         self._apply_styles()
         self.conn_data = conn_data
 

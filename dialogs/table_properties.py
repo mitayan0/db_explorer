@@ -19,6 +19,15 @@ class ColumnEditDialog(QDialog):
         self.db_type = db_type
         self.column_data = column_data
         self.setWindowTitle(f"Edit Column - {column_data.get('name', '')}")
+        self.setFixedSize(450, 300)
+        self.setWindowFlags(
+            Qt.WindowType.Dialog | 
+            Qt.WindowType.WindowTitleHint | 
+            Qt.WindowType.WindowCloseButtonHint |
+            Qt.WindowType.CustomizeWindowHint
+        )
+        self.setWindowFlags(self.windowFlags() & ~Qt.WindowType.WindowSystemMenuHint)
+        self.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
         self.setMinimumWidth(400)
 
         layout = QFormLayout(self)
@@ -84,6 +93,15 @@ class TablePropertiesDialog(QDialog):
         self.qualified_table_name = f'"{self.schema_name}"."{self.table_name}"' if self.db_type == 'postgres' else f'"{self.table_name}"'
 
         self.setWindowTitle(f"Properties - {self.table_name}")
+        self.setFixedSize(850, 600)
+        self.setWindowFlags(
+            Qt.WindowType.Dialog | 
+            Qt.WindowType.WindowTitleHint | 
+            Qt.WindowType.WindowCloseButtonHint |
+            Qt.WindowType.CustomizeWindowHint
+        )
+        self.setWindowFlags(self.windowFlags() & ~Qt.WindowType.WindowSystemMenuHint)
+        self.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
         self.setMinimumSize(850, 600)
 
         self.main_layout = QVBoxLayout(self)

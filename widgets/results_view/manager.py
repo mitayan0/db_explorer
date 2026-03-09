@@ -552,6 +552,13 @@ class ResultsManager(QObject):
         """Opens a dialog to set Limit and Offset like pgAdmin."""
         dialog = QDialog(self.main_window)
         dialog.setWindowTitle("Query Options")
+        dialog.setWindowFlags(
+            Qt.WindowType.Dialog | 
+            Qt.WindowType.WindowTitleHint | 
+            Qt.WindowType.WindowCloseButtonHint |
+            Qt.WindowType.CustomizeWindowHint
+        )
+        dialog.setWindowFlags(dialog.windowFlags() & ~Qt.WindowType.WindowMinMaxButtonsHint)
         dialog.setFixedSize(300, 150)
         
         layout = QFormLayout(dialog)

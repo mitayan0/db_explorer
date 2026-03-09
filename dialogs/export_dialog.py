@@ -113,7 +113,15 @@ class ExportDialog(QDialog):
         self.resize(550, 350)
         
         self.setSizeGripEnabled(True)
-        self.setWindowFlags(self.windowFlags() | Qt.WindowType.Window)
+        self.setFixedSize(700, 500)
+        self.setWindowFlags(
+            Qt.WindowType.Dialog | 
+            Qt.WindowType.WindowTitleHint | 
+            Qt.WindowType.WindowCloseButtonHint |
+            Qt.WindowType.CustomizeWindowHint
+        )
+        self.setWindowFlags(self.windowFlags() & ~Qt.WindowType.WindowSystemMenuHint)
+        self.setContextMenuPolicy(Qt.ContextMenuPolicy.NoContextMenu)
         
         main_layout = QVBoxLayout(self)
         tab_widget = QTabWidget()
