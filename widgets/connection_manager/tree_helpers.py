@@ -29,32 +29,32 @@ class TreeHelpers:
 
     def set_tree_item_icon(self, item, level, code=""):
         if level == "GROUP":
-            item.setIcon(qta.icon("fa5s.folder", color="#FFB300"))
+            item.setIcon(qta.icon("fa6s.folder", color="#C49102"))
             return
         if level == "GROUP_SCHEMAS":
-            item.setIcon(qta.icon("fa6s.layer-group", color="#FFB300"))
+            item.setIcon(qta.icon("fa6s.layer-group", color="#C49102"))
             return
         if level == "GROUP_TABLES":
-            item.setIcon(qta.icon("mdi.table-multiple", color="#FFB300"))
+            item.setIcon(qta.icon("mdi.table-multiple", color="#C49102"))
             return
         if level == "GROUP_VIEWS":
-            item.setIcon(qta.icon("mdi6.folder-eye", color="#FFB300"))
+            item.setIcon(qta.icon("mdi6.folder-eye", color="#C49102"))
             return
         if level == "GROUP_FOREIGN_TABLES":
-            item.setIcon(qta.icon("mdi.folder-network", color="#FFB300"))
+            item.setIcon(qta.icon("mdi.folder-network", color="#C49102"))
             return
         if level == "GROUP_FUNCTIONS":
             item.setIcon(qta.icon("mdi.code-braces", color="#E91E63"))
             return
         if level == "GROUP_TRIGGER_FUNCTIONS":
-            item.setIcon(qta.icon('mdi.code-braces', 'mdi.flash', options=[{'color': '#FFC107'}, {'color': '#FFC107', 'scale_factor': 0.5}]))
+            item.setIcon(qta.icon('mdi.code-braces', 'mdi.flash', options=[{'color': '#C49102'}, {'color': '#C49102', 'scale_factor': 0.5}]))
             return
         if level == "GROUP_SEQUENCES":
-            item.setIcon(qta.icon("mdi.numeric", color="#FF9800"))
+            item.setIcon(qta.icon("mdi.numeric", color="#BF7200"))
             return
 
         if level == "SCHEMA":
-            item.setIcon(qta.icon("mdi.cube-outline", color="#FFB300"))
+            item.setIcon(qta.icon("mdi.cube-outline", color="#C49102"))
             return
 
         if level == "TABLE":
@@ -78,19 +78,19 @@ class TreeHelpers:
             elif level == "FOREIGN_TABLE":
                 item.setIcon(qta.icon("mdi.table-network", color="#4CAF50"))
             elif level == "EXTENSION_ROOT":
-                item.setIcon(qta.icon("mdi.puzzle", color="#9C27B0"))
+                item.setIcon(qta.icon("mdi.puzzle", color="#8340A1"))
             elif level == "EXTENSION":
-                item.setIcon(qta.icon("mdi.puzzle", color="#9C27B0"))
+                item.setIcon(qta.icon("mdi.puzzle", color="#8340A1"))
             elif level == "LANGUAGE_ROOT":
                 item.setIcon(qta.icon("fa5s.code", color="#795548"))
             elif level == "LANGUAGE":
                 item.setIcon(qta.icon("fa5s.code", color="#795548"))
             elif level == "SEQUENCE":
-                item.setIcon(qta.icon("mdi.numeric", color="#FF9800"))
+                item.setIcon(qta.icon("mdi.numeric", color="#BF7200"))
             elif level == "FUNCTION":
                 item.setIcon(qta.icon("mdi.code-braces", color="#E91E63"))
             elif level == "TRIGGER_FUNCTION":
-                item.setIcon(qta.icon('mdi.code-braces', 'mdi.flash', options=[{'color': '#FFC107'}, {'color': '#FFC107', 'scale_factor': 0.5}]))
+                item.setIcon(qta.icon('mdi.code-braces', 'mdi.flash', options=[{'color': '#C49102'}, {'color': '#C49102', 'scale_factor': 0.5}]))
             elif level == "USER":
                 item.setIcon(qta.icon("fa5s.user", color="#607D8B"))
             return
