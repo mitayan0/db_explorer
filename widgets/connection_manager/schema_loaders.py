@@ -5,6 +5,7 @@ import psycopg2
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QStandardItem, QIcon
 from PyQt6.QtWidgets import QHeaderView
+import qtawesome as qta
 
 import db
 
@@ -83,7 +84,7 @@ class SchemaLoader:
 
             schemas_root = QStandardItem("Schemas")
             schemas_root.setEditable(False)
-            self.manager._set_tree_item_icon(schemas_root, level="GROUP")
+            self.manager._set_tree_item_icon(schemas_root, level="GROUP_SCHEMAS")
             schemas_root.setData({'db_type': 'postgres', 'type': 'schemas_root', 'conn_data': conn_data}, Qt.ItemDataRole.UserRole)
 
             for (schema_name,) in cursor.fetchall():
@@ -192,7 +193,7 @@ class SchemaLoader:
 
             for file_name in csv_files:
                 display_name, _ = os.path.splitext(file_name)
-                table_item = QStandardItem(QIcon("assets/table.svg"), display_name)
+                table_item = QStandardItem(qta.icon("mdi.table", color="#4CAF50"), display_name)
                 table_item.setEditable(False)
                 table_item.setData({
                     'db_type': 'csv',
@@ -231,7 +232,7 @@ class SchemaLoader:
             self.manager.schema_model.clear()
             self.manager.schema_model.setHorizontalHeaderLabels(["Name", "Type"])
             for table_name in tables:
-                table_item = QStandardItem(QIcon("assets/table.svg"), table_name)
+                table_item = QStandardItem(qta.icon("mdi.table", color="#4CAF50"), table_name)
                 table_item.setEditable(False)
                 table_item.setData({
                     'db_type': 'servicenow',

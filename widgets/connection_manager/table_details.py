@@ -41,7 +41,8 @@ class TableDetailsLoader:
                     for g_name, g_type, internal_group_name in groups:
                         group_item = QStandardItem(g_name)
                         group_item.setEditable(False)
-                        self.manager._set_tree_item_icon(group_item, level="GROUP")
+                        target_level = f"GROUP_{internal_group_name.replace(' ', '_').upper()}"
+                        self.manager._set_tree_item_icon(group_item, level=target_level)
 
                         group_data = item_data.copy()
                         group_data['type'] = 'schema_group'

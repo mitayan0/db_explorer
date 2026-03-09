@@ -56,6 +56,7 @@ from widgets.worksheet.history import (
     remove_all_history_for_connection as remove_all_history_for_connection_action,
 )
 from widgets.worksheet.utils import renumber_tabs as renumber_tabs_action, handle_event_filter, show_info as show_info_action
+from widgets.app_shell.file_ops import open_find_dialog as open_find_dialog_action
 
 class WorksheetManager(QWidget):
     def __init__(self, main_window):
@@ -199,7 +200,8 @@ class WorksheetManager(QWidget):
     def add_tab(self):
         return add_tab_action(self)
 
-
+    def open_find_dialog(self, replace=False):
+        open_find_dialog_action(self, replace)
 
 
     def show_editor_context_menu(self, pos, editor):
