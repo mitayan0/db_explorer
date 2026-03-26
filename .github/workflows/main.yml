@@ -49,23 +49,32 @@ jobs:
         uses: actions/upload-artifact@v4.6.1
         with:
           name: DB_Explorer_Executable
-          path: dist/DB_Explorer.exe
+          path: dist/DB_Explorer
 
   release:
     needs: build
     if: startsWith(github.ref, 'refs/tags/')
     runs-on: windows-latest
     steps:
+      - uses: actions/checkout@v4.2.2
+
       - name: Download Artifact
         uses: actions/download-artifact@v4.1.9
         with:
           name: DB_Explorer_Executable
-          path: dist
+          path: dist/DB_Explorer
+
+      - name: Install Inno Setup
+        run: choco install innosetup --yes
+
+      - name: Build installer
+        run: |
+          $version = "${{ github.ref_name }}".TrimStart('v')
+          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" /DAppVersion=$version installer.iss
+
       - name: Create Release
-        id: create_release
         uses: softprops/action-gh-release@v2.4.0
         with:
-          files: dist/DB_Explorer.exe
+          files: installer_output/DB_Explorer_Setup.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
