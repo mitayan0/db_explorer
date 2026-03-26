@@ -1,7 +1,8 @@
 [Setup]
 AppName=DB Explorer
 AppVersion={#AppVersion}
-AppPublisher=DB Explorer
+AppPublisher=Datafluent BD
+AppCopyright=Copyright (C) 2026 Datafluent BD
 DefaultDirName={autopf}\DB Explorer
 DefaultGroupName=DB Explorer
 OutputDir=installer_output
@@ -9,6 +10,7 @@ OutputBaseFilename=DB_Explorer_Setup
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
+LicenseFile=LICENSE.txt
 ; Require 64-bit Windows
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible

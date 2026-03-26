@@ -1,0 +1,25 @@
+END USER LICENSE AGREEMENT (EULA) - DB EXPLORER
+Copyright (c) 2026 Datafluent BD. All rights reserved.
+
+1. PERSONAL USE LICENSE
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software for PERSONAL, NON-COMMERCIAL purposes, including for home projects, educational use, and private research.
+
+2. COMMERCIAL USE RESTRICTION
+COMMERCIAL USE OF THIS SOFTWARE IS NOT PERMITTED WITHOUT A SEPARATE PAID LICENSE. 
+Commercial use includes, but is not limited to: 
+- Use within a company or organization for business purposes.
+- Use as part of a for-profit service.
+- Distribution as part of a commercial product.
+
+To obtain a commercial license, please contact the developer.
+
+3. PROPRIETARY RIGHTS
+The software and all associated documentation are protected by copyright laws. The developer retains all ownership rights, including copyrights, patents, and intellectual property rights.
+
+4. NO WARRANTY
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.
+
+5. VIOLATION AND TERMINATION
+Any unauthorized commercial use of this software constitutes a material violation of this Agreement and may lead to legal action.
+
+By installing, copying, or otherwise using the software, you agree to be bound by the terms of this Agreement.
