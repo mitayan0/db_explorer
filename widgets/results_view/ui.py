@@ -1,4 +1,5 @@
 import os
+from path_utils import get_resource_path
 
 from PyQt6.QtCore import Qt, QSize, QTimer
 from PyQt6.QtGui import QFont, QIcon, QMovie
@@ -92,7 +93,7 @@ def create_results_ui(manager, tab_content):
     )
 
     add_row_btn = QPushButton()
-    add_row_btn.setIcon(QIcon("assets/row-plus.svg"))
+    add_row_btn.setIcon(QIcon(get_resource_path("assets/row-plus.svg")))
     add_row_btn.setIconSize(QSize(16, 16))
     add_row_btn.setFixedSize(30, 30)
     add_row_btn.setToolTip("Add new row")
@@ -100,7 +101,7 @@ def create_results_ui(manager, tab_content):
     add_row_btn.clicked.connect(manager.add_empty_row)
 
     save_row_btn = QPushButton()
-    save_row_btn.setIcon(QIcon("assets/save.svg"))
+    save_row_btn.setIcon(QIcon(get_resource_path("assets/save.svg")))
     save_row_btn.setIconSize(QSize(16, 16))
     save_row_btn.setFixedSize(30, 30)
     save_row_btn.setToolTip("Save new row")
@@ -111,14 +112,14 @@ def create_results_ui(manager, tab_content):
     save_row_btn.clicked.connect(manager.save_new_row)
 
     copy_btn = QToolButton()
-    copy_btn.setIcon(QIcon("assets/copy.svg"))
+    copy_btn.setIcon(QIcon(get_resource_path("assets/copy.svg")))
     copy_btn.setIconSize(QSize(19, 19))
     copy_btn.setFixedSize(30, 30)
     copy_btn.setToolTip("Copy selected cells (Ctrl+C)")
     copy_btn.setStyleSheet(btn_style_bottom)
 
     paste_btn = QToolButton()
-    paste_btn.setIcon(QIcon("assets/paste.svg"))
+    paste_btn.setIcon(QIcon(get_resource_path("assets/paste.svg")))
     paste_btn.setIconSize(QSize(19, 19))
     paste_btn.setFixedSize(30, 30)
     paste_btn.setToolTip("Paste to editor")
@@ -126,7 +127,7 @@ def create_results_ui(manager, tab_content):
     paste_btn.clicked.connect(manager.paste_to_editor)
 
     delete_row_btn = QPushButton()
-    delete_row_btn.setIcon(QIcon("assets/trash.svg"))
+    delete_row_btn.setIcon(QIcon(get_resource_path("assets/trash.svg")))
     delete_row_btn.setIconSize(QSize(16, 16))
     delete_row_btn.setFixedSize(30, 30)
     delete_row_btn.setToolTip("Delete selected row(s)")
@@ -140,7 +141,7 @@ def create_results_ui(manager, tab_content):
     results_info_layout.addWidget(paste_btn)
 
     download_btn = QPushButton()
-    download_btn.setIcon(QIcon("assets/export.svg"))
+    download_btn.setIcon(QIcon(get_resource_path("assets/export.svg")))
     download_btn.setIconSize(QSize(16, 16))
     download_btn.setFixedSize(30, 30)
     download_btn.setToolTip("Download query result")
@@ -150,7 +151,7 @@ def create_results_ui(manager, tab_content):
 
     search_box = QLineEdit()
     search_box.setPlaceholderText("Search...")
-    icon_path = "assets/search.svg"
+    icon_path = get_resource_path("assets/search.svg")
 
     if os.path.exists(icon_path):
         search_icon = QIcon(icon_path)
@@ -212,7 +213,7 @@ def create_results_ui(manager, tab_content):
     results_info_layout.addWidget(rows_info_label)
 
     rows_setting_btn = QToolButton()
-    rows_setting_btn.setIcon(QIcon("assets/list-details.svg"))
+    rows_setting_btn.setIcon(QIcon(get_resource_path("assets/list-details.svg")))
     rows_setting_btn.setIconSize(QSize(16, 16))
     rows_setting_btn.setFixedSize(28, 28)
     rows_setting_btn.setToolTip("Edit Limit/Offset")
@@ -431,7 +432,7 @@ def create_results_ui(manager, tab_content):
     spinner_overlay_widget = QWidget()
     spinner_layout = QHBoxLayout(spinner_overlay_widget)
     spinner_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
-    spinner_movie = QMovie("assets/spinner.gif")
+    spinner_movie = QMovie(get_resource_path("assets/spinner.gif"))
     spinner_label = QLabel()
     spinner_label.setObjectName("spinner_label")
 
@@ -463,7 +464,7 @@ def create_results_ui(manager, tab_content):
     placeholder_content_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
     info_icon_label = QLabel()
-    info_icon_path = "assets/information.svg"
+    info_icon_path = get_resource_path("assets/information.svg")
     if os.path.exists(info_icon_path):
         info_icon_label.setPixmap(QIcon(info_icon_path).pixmap(20, 20))
     else:

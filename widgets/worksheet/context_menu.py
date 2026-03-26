@@ -1,5 +1,5 @@
-from PyQt6.QtWidgets import QMenu, QApplication
 from PyQt6.QtGui import QAction, QIcon
+from path_utils import get_resource_path
 
 
 def show_editor_context_menu(manager, pos, editor):
@@ -14,14 +14,14 @@ def show_editor_context_menu(manager, pos, editor):
         """
     )
 
-    undo_action = QAction(QIcon("assets/undo.svg"), "Undo", manager)
+    undo_action = QAction(QIcon(get_resource_path("assets/undo.svg")), "Undo", manager)
     undo_action.setIconVisibleInMenu(False)
     undo_action.setShortcut("Ctrl+Z")
     undo_action.triggered.connect(editor.undo)
     undo_action.setEnabled(editor.document().isUndoAvailable())
     menu.addAction(undo_action)
 
-    redo_action = QAction(QIcon("assets/redo.svg"), "Redo", manager)
+    redo_action = QAction(QIcon(get_resource_path("assets/redo.svg")), "Redo", manager)
     redo_action.setIconVisibleInMenu(False)
     redo_action.setShortcut("Ctrl+Y")
     redo_action.triggered.connect(editor.redo)
@@ -42,7 +42,7 @@ def show_editor_context_menu(manager, pos, editor):
     copy_action.setEnabled(editor.textCursor().hasSelection())
     menu.addAction(copy_action)
 
-    paste_action = QAction(QIcon("assets/paste.svg"), "Paste", manager)
+    paste_action = QAction(QIcon(get_resource_path("assets/paste.svg")), "Paste", manager)
     paste_action.setIconVisibleInMenu(False)
     paste_action.setShortcut("Ctrl+V")
     paste_action.triggered.connect(editor.paste)
@@ -70,7 +70,7 @@ def show_editor_context_menu(manager, pos, editor):
     menu.addAction(explain_plan_action)
 
     menu.addSeparator()
-    format_action = QAction(QIcon("assets/format_icon.png"), "Format SQL", manager)
+    format_action = QAction(QIcon(get_resource_path("assets/format_icon.png")), "Format SQL", manager)
     format_action.setIconVisibleInMenu(False)
     format_action.setShortcut("Ctrl+Shift+F")
     format_action.triggered.connect(manager.format_sql_text)

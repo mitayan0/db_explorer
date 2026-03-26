@@ -3,6 +3,7 @@ import re
 import db
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QStandardItem, QIcon
+from path_utils import get_resource_path
 
 
 class TableDetailsLoader:
@@ -627,7 +628,7 @@ class TableDetailsLoader:
 
         try:
             column_item = QStandardItem("column_name TEXT")
-            column_item.setIcon(QIcon("assets/column_icon.png"))
+            column_item.setIcon(QIcon(get_resource_path("assets/column_icon.png")))
             column_item.setEditable(False)
             item.appendRow(column_item)
 

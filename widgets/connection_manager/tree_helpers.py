@@ -1,5 +1,6 @@
 from PyQt6.QtCore import Qt, QEvent
 from PyQt6.QtGui import QIcon
+from path_utils import get_resource_path
 import qtawesome as qta
 
 
@@ -65,7 +66,7 @@ class TreeHelpers:
             return
 
         if level == "COLUMN":
-            item.setIcon(QIcon("assets/column_icon.png"))
+            item.setIcon(QIcon(get_resource_path("assets/column_icon.png")))
             return
 
         if level in ["FDW_ROOT", "FDW", "SERVER", "FOREIGN_TABLE", "EXTENSION_ROOT", "EXTENSION", "LANGUAGE_ROOT", "LANGUAGE", "SEQUENCE", "FUNCTION", "TRIGGER_FUNCTION"]:
@@ -104,7 +105,7 @@ class TreeHelpers:
             "CSV": "assets/csv.svg"
         }
 
-        icon_path = icon_map.get(code, "assets/database.svg")
+        icon_path = get_resource_path(icon_map.get(code, "assets/database.svg"))
         item.setIcon(QIcon(icon_path))
 
     def save_tree_expansion_state(self):

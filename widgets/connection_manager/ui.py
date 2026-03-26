@@ -1,4 +1,5 @@
 import os
+from path_utils import get_resource_path
 
 from PyQt6.QtWidgets import (
     QVBoxLayout, QWidget, QHBoxLayout, QLabel, QLineEdit, QToolButton,
@@ -49,7 +50,7 @@ class ConnectionUI:
         self.manager.explorer_search_box.setMinimumWidth(120)
         self.manager.explorer_search_box.hide()
 
-        search_icon_path = "assets/search.svg"
+        search_icon_path = get_resource_path("assets/search.svg")
         if os.path.exists(search_icon_path):
             self.manager.explorer_search_box.addAction(QIcon(search_icon_path), QLineEdit.ActionPosition.LeadingPosition)
 
@@ -98,7 +99,7 @@ class ConnectionUI:
         self.add_new_type_btn.setFixedSize(24, 24)
         self.add_new_type_btn.setIconSize(QSize(16, 16))
         self.add_new_type_btn.setToolTip("Add New Connection Type")
-        self.add_new_type_btn.setIcon(QIcon("assets/plus.svg"))
+        self.add_new_type_btn.setIcon(QIcon(get_resource_path("assets/plus.svg")))
         self.add_new_type_btn.setStyleSheet("""
             QToolButton {
                 border: none;

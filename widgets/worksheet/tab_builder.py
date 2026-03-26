@@ -17,6 +17,7 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QAction, QFont, QIcon, QKeySequence, QShortcut
+from path_utils import get_resource_path
 
 from widgets.worksheet.code_editor import CodeEditor
 
@@ -47,6 +48,8 @@ def add_tab(manager):
     toolbar_layout.setContentsMargins(6, 3, 6, 3)
     toolbar_layout.setSpacing(6)
 
+    chevron_path = get_resource_path('assets/chevron-down.svg').replace('\\', '/')
+
     btn_style = (
         "QToolButton, QPushButton, QComboBox { "
         "padding: 2px 8px; border: 1px solid #b9b9b9; "
@@ -69,7 +72,7 @@ def add_tab(manager):
         "background-color: #dcdcdc; "
         "} "
         "QComboBox::down-arrow { "
-        "image: url(assets/chevron-down.svg); "
+        f"image: url({chevron_path}); "
         "width: 10px; height: 10px; "
         "} "
     )
@@ -118,8 +121,8 @@ def add_tab(manager):
     explain_combo.setFixedHeight(30)
     explain_combo.setFixedWidth(135)
     explain_combo.setStyleSheet(btn_style)
-    explain_combo.addItem(QIcon("assets/explain_icon.png"), "Explain Analyze")
-    explain_combo.addItem(QIcon("assets/explain_icon.png"), "Explain (Plan)")
+    explain_combo.addItem(QIcon(get_resource_path("assets/explain_icon.png")), "Explain Analyze")
+    explain_combo.addItem(QIcon(get_resource_path("assets/explain_icon.png")), "Explain (Plan)")
 
     def on_explain_activated(index):
         if index == 0:
@@ -137,15 +140,15 @@ def add_tab(manager):
     edit_btn.setFixedWidth(85)
     edit_btn.setStyleSheet(
         btn_style
-        + """
-            QToolButton::menu-indicator {
+        + f"""
+            QToolButton::menu-indicator {{
                 border-left: 1px solid #dddfe2;
                 width: 20px;
-                image: url(assets/chevron-down.svg);
+                image: url({chevron_path});
                 subcontrol-origin: padding;
                 subcontrol-position: right center;
                 margin-left: 4px;
-            }
+            }}
         """
     )
     edit_btn.setToolTip("Edit Operations")
@@ -173,8 +176,8 @@ def add_tab(manager):
         edit_menu.addAction(action)
         return action
 
-    add_menu_action("Find", "Ctrl+F", "assets/search.svg", lambda: manager.open_find_dialog(False))
-    add_menu_action("Replace", "Ctrl+Alt+F", "assets/refresh.svg", lambda: manager.open_find_dialog(True))
+    add_menu_action("Find", "Ctrl+F", get_resource_path("assets/search.svg"), lambda: manager.open_find_dialog(False))
+    add_menu_action("Replace", "Ctrl+Alt+F", get_resource_path("assets/refresh.svg"), lambda: manager.open_find_dialog(True))
     add_menu_action("Go to Line/Column", "Ctrl+L", None, manager.go_to_line)
     edit_menu.addSeparator()
     add_menu_action("Indent Selection", "Tab", None, lambda: manager._get_current_editor() and manager._get_current_editor().indent_selection())
@@ -182,8 +185,8 @@ def add_tab(manager):
     add_menu_action("Toggle Comment", "Ctrl+/", None, lambda: manager._get_current_editor() and manager._get_current_editor().toggle_comment())
     add_menu_action("Toggle Case of Selected Text", "Ctrl+Shift+U", None, lambda: manager._get_current_editor() and manager._get_current_editor().toggle_case())
     edit_menu.addSeparator()
-    add_menu_action("Clear Query", "Ctrl+Alt+L", "assets/delete_icon.png", manager.clear_query_text)
-    add_menu_action("Format SQL", "Ctrl+K", "assets/format_icon.png", manager.format_sql_text)
+    add_menu_action("Clear Query", "Ctrl+Alt+L", get_resource_path("assets/delete_icon.png"), manager.clear_query_text)
+    add_menu_action("Format SQL", "Ctrl+K", get_resource_path("assets/format_icon.png"), manager.format_sql_text)
 
     edit_btn.setMenu(edit_menu)
     toolbar_layout.addWidget(edit_btn)
