@@ -31,7 +31,8 @@ a = Analysis(
         'openpyxl',
         'cdata.servicenow',
         'cdata.csv',
-        'psycopg2-binary'
+        'psycopg2-binary',
+        'keyring'
     ],
     hookspath=[],
     hooksconfig={},

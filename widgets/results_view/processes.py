@@ -1,7 +1,6 @@
 import datetime
 import sqlite3 as sqlite
-import os
-from path_utils import get_resource_path, get_appdata_path
+from path_utils import get_appdata_path
 
 from PyQt6.QtCore import Qt, QTimer
 from PyQt6.QtGui import QColor, QPalette, QStandardItem, QStandardItemModel

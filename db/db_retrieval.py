@@ -1,6 +1,9 @@
 import sqlite3 as sqlite
+import keyring
 from db.db_connections import DB_FILE, create_postgres_connection 
- 
+
+KEYRING_SERVICE = "DB_Explorer_Credentials"
+
 def get_all_connections_from_db():
     """Returns a list of dicts with full hierarchical connection info from usf_connections table."""
     with sqlite.connect(DB_FILE) as conn:
@@ -20,6 +23,16 @@ def get_all_connections_from_db():
     for row in rows:
         (connection_id, connection_type_name, code, connection_group_name, connection_name, short_name, host,
          port, dbname, db_path, user, password,instance_url) = row
+        
+        # If password is a placeholder, fetch the real one from keyring
+        if password == "[SECURE_STORAGE]":
+            try:
+                real_password = keyring.get_password(KEYRING_SERVICE, str(connection_id))
+                if real_password:
+                    password = real_password
+            except Exception as e:
+                print(f"Keyring fetch error for {connection_id}: {e}")
+
         full_name = f"{connection_type_name} -> {connection_group_name} -> {connection_name} ({short_name})"
         connections.append({
             "id": connection_id,
@@ -37,36 +50,6 @@ def get_all_connections_from_db():
 
         })
     return connections
-
-# def get_hierarchy_data():
-#     """Returns all usf_connection_types, usf_connection_groups, and usf_connections for the main tree view."""
-#     with sqlite.connect(DB_FILE) as conn:
-#         c = conn.cursor()
-#         c.execute("SELECT id, name FROM usf_connection_types")
-#         usf_connection_types = c.fetchall()
-
-#         data = []
-#         for connection_type_id, connection_type_name in usf_connection_types:
-#             connection_type_data = {'id': connection_type_id, 'name': connection_type_name, 'usf_connection_groups': []}
-#             c.execute(
-#                 "SELECT id, name FROM usf_connection_groups WHERE connection_type_id=?", (connection_type_id,))
-#             connection_groups = c.fetchall()
-
-#             for connection_group_id, connection_group_name in connection_groups:
-#                 connection_group_data = {'id': connection_group_id,
-#                                'name': connection_group_name, 'usf_connections': []}
-#                 c.execute(
-#                     "SELECT id, name, short_name, host, \"database\", \"user\", password, port, db_path FROM usf_connections WHERE connection_group_id=?", (connection_group_id,))
-#                 usf_connections = c.fetchall()
-#                 for connections in usf_connections:
-#                     connection_id, name, short_name, host, db, user, pwd, port, db_path = connections
-#                     conn_data = {"id": connection_id, "name": name, "short_name": short_name, "host": host, "database": db,
-#                                  "user": user, "password": pwd, "port": port, "db_path": db_path}
-#                     connection_group_data['usf_connections'].append(conn_data)
-#                 connection_type_data['usf_connection_groups'].append(connection_group_data)
-#             data.append(connection_type_data)
-#     return data
-
 
 def get_hierarchy_data():
     """Returns all usf_connection_types, usf_connection_groups, and usf_connections for the main tree view."""
@@ -90,6 +73,16 @@ def get_hierarchy_data():
                 usf_connections = c.fetchall()
                 for connections in usf_connections:
                     connection_id, name, short_name, host, db, user, pwd, port, dsn, db_path, instance_url = connections
+                    
+                    # Fetch real password from keyring if needed
+                    if pwd == "[SECURE_STORAGE]":
+                        try:
+                            pk = keyring.get_password(KEYRING_SERVICE, str(connection_id))
+                            if pk:
+                                pwd = pk
+                        except Exception as e:
+                            print(f"Keyring hierarchy fetch error: {e}")
+
                     conn_data = {"id": connection_id, "name": name, "short_name": short_name, "host": host, "database": db,
                                  "user": user, "password": pwd, "port": port, "dsn": dsn,"db_path": db_path, "instance_url": instance_url}
                     connection_group_data['usf_connections'].append(conn_data)

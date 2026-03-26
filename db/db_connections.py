@@ -2,8 +2,6 @@ import sqlite3 as sqlite
 import psycopg2
 from psycopg2 import OperationalError
 import oracledb
-import sys
-import os
 import cdata.servicenow as sn
 
 from path_utils import get_resource_path, get_appdata_path
