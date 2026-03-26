@@ -7,6 +7,6 @@ DbExplorer.spec
 *.xls
 *.xlsx
 *.csv
-databases/hierarchy.db
-*.json
-.gitignore
+databases/*.json
+.venv
+# /drivers  <--- Removed from ignore to allow CData wheels in CI
