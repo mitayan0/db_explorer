@@ -2,11 +2,12 @@ db_venv/
 __pycache__/
 build/
 dist/
-DbExplorer.spec
+DB_Explorer.spec
+*.spec
 *.pyc
 *.xls
 *.xlsx
 *.csv
-databases/*.json
+*.json
 .venv
 # /drivers  <--- Removed from ignore to allow CData wheels in CI
