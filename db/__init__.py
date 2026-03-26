@@ -57,4 +57,5 @@ __all__ = [
     "delete_connection_group",
     "update_connection_type",
     "delete_connection_type",
+    "create_servicenow_connection",
 ]

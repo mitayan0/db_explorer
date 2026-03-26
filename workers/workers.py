@@ -88,7 +88,8 @@ class RunnableExport(QRunnable):
             file_path = self.export_options['filename']
             file_format = os.path.splitext(file_path)[1].lower()
             delimiter = self.export_options.get('delimiter', ',')
-            if not delimiter: delimiter = ','
+            if not delimiter:
+                delimiter = ','
             
             # --- Check Semicolon for CSV/TXT ---
             # Restriction removed to allow user selected delimiter
@@ -188,7 +189,8 @@ class RunnableExportFromModel(QRunnable):
                 # Restriction removed to allow user selected delimiter
  
                 
-                if not delimiter: delimiter = ','
+                if not delimiter:
+                    delimiter = ','
                 
                 df.to_csv(
                     file_path,
@@ -320,8 +322,10 @@ class RunnableQuery(QRunnable):
         except Exception as e:
             if not self._is_cancelled:
                 if conn:
-                    try: conn.rollback()
-                    except: pass
+                    try:
+                        conn.rollback()
+                    except Exception:
+                        pass
                 elapsed_time = time.time() - start_time if 'start_time' in locals() else 0
                 conn_payload = self.conn_data if isinstance(self.conn_data, dict) else {}
                 emit_query_error(self.signals, conn_payload, self.query, 0, elapsed_time, str(e))

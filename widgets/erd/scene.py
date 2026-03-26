@@ -79,7 +79,8 @@ class ERDScene(QGraphicsScene):
 
     def find_table_item(self, text):
         text = text.strip().lower()
-        if not text: return None
+        if not text:
+            return None
         
         # Return the first best match
         # defined as: starts with text -> contains text
@@ -87,7 +88,8 @@ class ERDScene(QGraphicsScene):
         for item in self.items():
             if isinstance(item, ERDTableItem):
                 name = item.table_name.lower()
-                if name == text: return item # Exact match
+                if name == text:
+                    return item # Exact match
                 if name.startswith(text):
                     candidates.insert(0, item) # Priority to prefix match
                 elif text in name:

@@ -2,7 +2,6 @@ import os
 import uuid
 import datetime
 import re
-import sqlite3 as sqlite
 import copy
 from numbers import Number
 
@@ -332,7 +331,8 @@ class ResultsManager(QObject):
 
 
     def stop_spinner(self, target_tab, success=True, target_index=0):
-        if not target_tab: return
+        if not target_tab:
+            return
         stacked_widget = target_tab.findChild(QStackedWidget, "results_stacked_widget")
         results_info_bar = target_tab.findChild(QWidget, "resultsInfoBar")
         process_filter_bar = target_tab.findChild(QWidget, "processFilterBar")

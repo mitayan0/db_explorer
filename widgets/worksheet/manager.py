@@ -1,19 +1,16 @@
 import qtawesome as qta
 
 from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QSplitter, QMessageBox,
-    QMenu, QComboBox, QToolButton, QStackedWidget, QTextEdit,
-    QLabel, QPushButton, QAbstractItemView,
-    QButtonGroup, QFrame, QTreeView, QGroupBox, QTabWidget
+    QWidget, QTextEdit,
+    QFrame
 )
 from PyQt6.QtCore import (
-    Qt, QTimer, QSize, QEvent, QRect
+    QRect
 )
 from PyQt6.QtGui import (
-    QAction, QFont, QIcon, QKeySequence, QShortcut
+    QIcon
 )
 
-import db
 from widgets.worksheet.code_editor import CodeEditor
 from widgets.worksheet.editor_actions import (
     format_sql_text as format_sql_text_action,
@@ -111,7 +108,8 @@ class WorksheetManager(QWidget):
 
     def _get_current_editor(self):
         current_tab = self.tab_widget.currentWidget()
-        if not current_tab: return None
+        if not current_tab:
+            return None
         return current_tab.findChild(CodeEditor, "query_editor")
 
 # {mitayan}

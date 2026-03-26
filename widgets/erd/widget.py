@@ -6,10 +6,10 @@ import qtawesome as qta
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout,
     QToolBar, QFileDialog, QMessageBox, QDialog,
-    QTextEdit, QDialogButtonBox, QToolButton, QLineEdit, QMenu, QSplitter
+    QTextEdit, QDialogButtonBox, QToolButton, QLineEdit
 )
 from PyQt6.QtGui import QAction, QTransform, QPixmap, QPainter, QFont, QColor, QUndoStack, QPdfWriter, QPageSize
-from PyQt6.QtCore import Qt, QSize, QEvent, QRectF, QTimer, QPointF
+from PyQt6.QtCore import Qt, QSize, QRectF, QTimer, QPointF
 from PyQt6.QtSvg import QSvgGenerator
 
 from widgets.erd.items.table_item import ERDTableItem
@@ -523,7 +523,8 @@ class ERDWidget(QWidget):
         # 3. Create connection items
         for full_name, table_info in self.schema_data.items():
             source_item = self.scene.tables.get(full_name)
-            if not source_item: continue
+            if not source_item:
+                continue
             
             # Get PK info for source table to detect Identifying relationships
             pk_cols = {col['name'] for col in table_info['columns'] if col.get('pk')}

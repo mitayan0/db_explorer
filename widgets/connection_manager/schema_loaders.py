@@ -3,7 +3,7 @@ import sqlite3 as sqlite
 
 import psycopg2
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QStandardItem, QIcon
+from PyQt6.QtGui import QStandardItem
 from PyQt6.QtWidgets import QHeaderView
 import qtawesome as qta
 
