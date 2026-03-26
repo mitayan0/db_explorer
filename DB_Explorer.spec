@@ -30,7 +30,8 @@ a = Analysis(
         'qtawesome',
         'openpyxl',
         'cdata.servicenow',
-        'cdata.csv'
+        'cdata.csv',
+        'psycopg2-binary'
     ],
     hookspath=[],
     hooksconfig={},
@@ -55,7 +56,7 @@ exe = EXE(
     strip=False,
     upx=True,
     upx_exclude=[],
-    console=False,
+    console=True,
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
