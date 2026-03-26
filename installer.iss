@@ -1,3 +1,7 @@
+#ifndef AppVersion
+  #define AppVersion "1.0.0"
+#endif
+
 [Setup]
 AppName=DB Explorer
 AppVersion={#AppVersion}
@@ -6,7 +10,7 @@ AppCopyright=Copyright (C) 2026 Datafluent BD
 DefaultDirName={autopf}\DB Explorer
 DefaultGroupName=DB Explorer
 OutputDir=installer_output
-OutputBaseFilename=DB_Explorer_Setup
+OutputBaseFilename=DB-Explorer-v{#AppVersion}-Setup
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern

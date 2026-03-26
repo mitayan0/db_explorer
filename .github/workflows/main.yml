@@ -75,6 +75,6 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v2.4.0
         with:
-          files: installer_output/DB_Explorer_Setup.exe
+          files: installer_output/*.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
