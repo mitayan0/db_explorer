@@ -1,16 +1,21 @@
-# -*- mode: python ; coding: utf-8 -*-
+import os
+import sys
 
 block_cipher = None
 
-# List all data files to be included
+# Set project root to current working directory
+project_root = os.getcwd()
+
+# List all data files to be included with absolute source paths
+# But keep destination paths relative (they are relative to the app bundle)
 added_files = [
-    ('databases', 'databases'),
-    ('assets', 'assets'),
+    (os.path.join(project_root, 'databases'), 'databases'),
+    (os.path.join(project_root, 'assets'), 'assets'),
 ]
 
 a = Analysis(
     ['main.py'],
-    pathex=[],
+    pathex=[project_root],
     binaries=[],
     datas=added_files,
     hiddenimports=[
@@ -53,12 +58,12 @@ exe = EXE(
     upx=True,
     upx_exclude=[],
     runtime_tmpdir=None,
-    console=False,  # Set to False for windowed application
+    console=False,
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    version='file_version_info.txt',
-    icon='assets/app_icon.ico' if os.path.exists('assets/app_icon.ico') else None,
+    version=os.path.join(project_root, 'file_version_info.txt'),
+    icon=os.path.join(project_root, 'assets', 'app_icon.ico') if os.path.exists(os.path.join(project_root, 'assets', 'app_icon.ico')) else None,
 )
