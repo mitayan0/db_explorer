@@ -6,14 +6,14 @@ import sys
 import os
 import cdata.servicenow as sn
 
+from path_utils import get_resource_path, get_appdata_path
+
 def resource_path(relative_path):
     """Get absolute path to resource, works for dev and PyInstaller."""
-    if hasattr(sys, '_MEIPASS'):
-        return os.path.join(sys._MEIPASS, relative_path)
-    return os.path.join(os.path.abspath("."), relative_path)
+    return get_resource_path(relative_path)
 
 # Database file path updated
-DB_FILE = resource_path("databases/hierarchy.db")
+DB_FILE = get_appdata_path("hierarchy.db")
 
 # --- Database Connection Functions ---
 def create_sqlite_connection(path):

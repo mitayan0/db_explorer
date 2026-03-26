@@ -1,10 +1,14 @@
 import datetime
 import sqlite3 as sqlite
+import os
+from path_utils import get_resource_path, get_appdata_path
 
 from PyQt6.QtCore import Qt, QTimer
 from PyQt6.QtGui import QColor, QPalette, QStandardItem, QStandardItemModel
-from PyQt6.QtWidgets import QComboBox, QPushButton, QStackedWidget, QStyledItemDelegate, QStyle, QStyleOptionViewItem, QTableView, QWidget, QAbstractItemView
-
+from PyQt6.QtWidgets import (
+    QComboBox, QPushButton, QStackedWidget, QStyledItemDelegate, QStyle, 
+    QStyleOptionViewItem, QTableView, QWidget, QAbstractItemView
+)
 
 class ProcessRowDelegate(QStyledItemDelegate):
     """Draws status-based row background while preserving distinct cell/row/column selection behavior."""
@@ -254,7 +258,7 @@ def handle_process_started(manager, process_id, data):
 
     manager.switch_to_processes_view()
 
-    conn = sqlite.connect("databases/hierarchy.db")
+    conn = sqlite.connect(get_appdata_path("hierarchy.db"))
     cursor = conn.cursor()
     if target_conn_id:
         cursor.execute(
@@ -294,7 +298,7 @@ def handle_process_started(manager, process_id, data):
 
 def handle_process_finished(manager, process_id, message, time_taken, row_count):
     status = "Successfull" if row_count == 0 else "Successfull"
-    conn = sqlite.connect("databases/hierarchy.db")
+    conn = sqlite.connect(get_appdata_path("hierarchy.db"))
     cursor = conn.cursor()
     cursor.execute(
         """
@@ -316,7 +320,7 @@ def handle_process_finished(manager, process_id, message, time_taken, row_count)
 
 
 def handle_process_error(manager, process_id, error_message):
-    conn = sqlite.connect("databases/hierarchy.db")
+    conn = sqlite.connect(get_appdata_path("hierarchy.db"))
     cursor = conn.cursor()
     cursor.execute(
         """
@@ -354,7 +358,7 @@ def refresh_processes_view(manager):
     if not processes_view or not model:
         return
 
-    conn = sqlite.connect("databases/hierarchy.db")
+    conn = sqlite.connect(get_appdata_path("hierarchy.db"))
     cursor = conn.cursor()
 
     if selected_server:
