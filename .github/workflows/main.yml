@@ -44,7 +44,7 @@ jobs:
           pip install pyinstaller
       - name: Build with PyInstaller
         run: |
-          pyinstaller --onefile --windowed --name DB_Explorer main.py
+          pyinstaller DB_Explorer.spec
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
