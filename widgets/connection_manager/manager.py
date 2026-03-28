@@ -5,9 +5,9 @@ Package-native implementation used as the primary ConnectionManager entrypoint.
 
 
 import qtawesome as qta
-from PyQt6.QtCore import Qt, QModelIndex
-from PyQt6.QtGui import QStandardItem
-from PyQt6.QtWidgets import (
+from PySide6.QtCore import Qt, QModelIndex
+from PySide6.QtGui import QStandardItem
+from PySide6.QtWidgets import (
     QWidget,
     QMessageBox,
     QDialog,

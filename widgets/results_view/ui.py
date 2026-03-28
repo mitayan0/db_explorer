@@ -1,9 +1,9 @@
 import os
 from path_utils import get_resource_path
 
-from PyQt6.QtCore import Qt, QSize, QTimer
-from PyQt6.QtGui import QFont, QIcon, QMovie
-from PyQt6.QtWidgets import (
+from PySide6.QtCore import Qt, QSize, QTimer
+from PySide6.QtGui import QFont, QIcon, QMovie
+from PySide6.QtWidgets import (
     QButtonGroup,
     QHBoxLayout,
     QLabel,

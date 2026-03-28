@@ -1,5 +1,5 @@
-from PyQt6.QtWidgets import QMenu, QApplication
-from PyQt6.QtGui import QAction, QIcon
+from PySide6.QtWidgets import QMenu, QApplication
+from PySide6.QtGui import QAction, QIcon
 from path_utils import get_resource_path
 
 

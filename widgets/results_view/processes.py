@@ -2,9 +2,9 @@ import datetime
 import sqlite3 as sqlite
 from path_utils import get_appdata_path
 
-from PyQt6.QtCore import Qt, QTimer
-from PyQt6.QtGui import QColor, QPalette, QStandardItem, QStandardItemModel
-from PyQt6.QtWidgets import (
+from PySide6.QtCore import Qt, QTimer
+from PySide6.QtGui import QColor, QPalette, QStandardItem, QStandardItemModel
+from PySide6.QtWidgets import (
     QComboBox, QPushButton, QStackedWidget, QStyledItemDelegate, QStyle, 
     QStyleOptionViewItem, QTableView, QWidget, QAbstractItemView
 )

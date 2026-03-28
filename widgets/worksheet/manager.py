@@ -1,13 +1,13 @@
 import qtawesome as qta
 
-from PyQt6.QtWidgets import (
+from PySide6.QtWidgets import (
     QWidget, QTextEdit,
     QFrame
 )
-from PyQt6.QtCore import (
+from PySide6.QtCore import (
     QRect
 )
-from PyQt6.QtGui import (
+from PySide6.QtGui import (
     QIcon
 )
 

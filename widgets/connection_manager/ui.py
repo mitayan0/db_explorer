@@ -1,12 +1,12 @@
 import os
 from path_utils import get_resource_path
 
-from PyQt6.QtWidgets import (
+from PySide6.QtWidgets import (
     QVBoxLayout, QWidget, QHBoxLayout, QLabel, QLineEdit, QToolButton,
     QSplitter, QTreeView, QFrame, QAbstractItemView, QHeaderView
 )
-from PyQt6.QtGui import QIcon, QStandardItemModel
-from PyQt6.QtCore import Qt, QSize, QSortFilterProxyModel
+from PySide6.QtGui import QIcon, QStandardItemModel
+from PySide6.QtCore import Qt, QSize, QSortFilterProxyModel
 
 
 class ConnectionUI:

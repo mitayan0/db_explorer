@@ -1,13 +1,13 @@
 import json
 import os
-from PyQt6.QtWidgets import (
+from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QTreeWidget, QTreeWidgetItem, 
     QHeaderView, QLabel, QSplitter, QTabWidget, QTableWidget, QTableWidgetItem,
     QGraphicsView, QGraphicsScene, QGraphicsItem, QGraphicsLineItem, QToolBar, QPushButton, QFrame,
     QStyledItemDelegate, QStyle, QStyleOptionProgressBar, QApplication
 )
-from PyQt6.QtCore import Qt, QRectF, pyqtSignal
-from PyQt6.QtGui import QPen, QBrush, QColor, QFont, QPainter, QPixmap
+from PySide6.QtCore import Qt, QRectF, Signal
+from PySide6.QtGui import QPen, QBrush, QColor, QFont, QPainter, QPixmap
 
 class AnalysisItemDelegate(QStyledItemDelegate):
     """Custom delegate to render timing columns with inline progress bars like pgAdmin."""
@@ -549,7 +549,7 @@ class PlanNodeItem(QGraphicsItem):
         painter.drawText(QRectF(8, 62, self.width-16, 15), Qt.AlignmentFlag.AlignLeft, cost_text)
 
 class ExplainGraphView(QGraphicsView):
-    nodeSelected = pyqtSignal(dict)
+    nodeSelected = Signal(dict)
     
     def __init__(self, parent=None):
         super().__init__(parent)

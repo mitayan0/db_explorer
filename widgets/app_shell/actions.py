@@ -1,5 +1,5 @@
 import qtawesome as qta
-from PyQt6.QtGui import QAction, QIcon
+from PySide6.QtGui import QAction, QIcon
 from path_utils import get_resource_path
 
 

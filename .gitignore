@@ -11,3 +11,4 @@ DB_Explorer.spec
 *.json
 .venv
 # /drivers  <--- Removed from ignore to allow CData wheels in CI
+installer_output/
